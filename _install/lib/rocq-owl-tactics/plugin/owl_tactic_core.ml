@@ -26,12 +26,13 @@ let owl_model_message () =
   let summary = Owl_bridge.make_demo_model_summary () in
   let prediction = Owl_bridge.demo_prediction () in
   Printf.sprintf
-    "Owl demo model ready: input=%d hidden=%d output=%d params=%d sample=[%s]"
+    "Owl MLP tactic policy ready: input=%d hidden=%d output=%d params=%d actions=[%s] sample=[%s]"
     summary.input_dim
     summary.hidden_dim
     summary.output_dim
     summary.parameter_count
-    (format_float_list prediction)
+    (String.concat ", " summary.action_labels)
+    (Owl_bridge.format_prediction prediction)
 
 let show_owl_model_info () =
   Feedback.msg_notice (str (owl_model_message ()))
@@ -74,38 +75,22 @@ let matching_hypothesis_count sigma env concl =
   in
   loop (Environ.named_context_val env) 0
 
+let action_of_label = function
+  | "assumption" -> TryAssumption
+  | "reflexivity" -> TryReflexivity
+  | "exact I" -> TryExactTrue
+  | "intro" -> TryIntro
+  | label -> invalid_arg ("unknown action label from Owl bridge: " ^ label)
+
 let score_actions ~hyp_count ~matches_goal ~is_true ~is_equality ~is_product =
-  let open Owl in
-  let x =
-    Mat.of_arrays
-      [|
-        [|
-          float_of_int hyp_count;
-          float_of_int matches_goal;
-          if is_true then 1.0 else 0.0;
-          if is_equality then 1.0 else 0.0;
-          if is_product then 1.0 else 0.0;
-        |];
-      |]
-  in
-  let w =
-    Mat.of_arrays
-      [|
-        [| 0.35; 0.00; 0.00; 0.00 |];
-        [| 1.80; 0.20; 0.10; -0.20 |];
-        [| 0.00; 0.00; 2.20; -0.40 |];
-        [| 0.10; 2.40; -0.30; -0.20 |];
-        [| -0.10; -0.20; -0.20; 2.50 |];
-      |]
-  in
-  let b = Mat.of_arrays [| [| 0.10; 0.05; 0.05; 0.05 |] |] in
-  let scores = Mat.(softmax (dot x w + b)) in
-  let score i = Mat.get scores 0 i in
-  [ { action = TryAssumption; score = score 0 }
-  ; { action = TryReflexivity; score = score 1 }
-  ; { action = TryExactTrue; score = score 2 }
-  ; { action = TryIntro; score = score 3 }
-  ]
+  Owl_bridge.predict_action_scores
+    { Owl_bridge.hypothesis_count = hyp_count
+    ; matching_hypothesis_count = matches_goal
+    ; goal_is_true = is_true
+    ; goal_is_equality = is_equality
+    ; goal_is_product = is_product
+    }
+  |> List.map (fun (label, score) -> { action = action_of_label label; score })
 
 let ranked_actions env sigma concl =
   let scored =
