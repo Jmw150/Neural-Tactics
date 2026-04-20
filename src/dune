@@ -1,0 +1,17 @@
+(library
+ (name rocq_owl_tactics_plugin)
+ (public_name rocq-owl-tactics.plugin)
+ (modules owl_bridge owl_tactic_core g_owl_tactics)
+ (libraries
+  owl
+  coq-core.boot
+  coq-core.clib
+  coq-core.lib
+  coq-core.kernel
+  coq-core.engine
+  coq-core.vernac
+  coq-core.toplevel
+  coq-core.plugins.ltac)
+ (library_flags -linkall)
+ (modes native)
+ (flags (:standard -w -27-30-39)))

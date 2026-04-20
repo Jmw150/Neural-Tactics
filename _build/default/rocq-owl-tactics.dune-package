@@ -1,0 +1,77 @@
+(lang dune 3.21)
+(name rocq-owl-tactics)
+(version 0.1.0)
+(sections
+ (lib .)
+ (libexec .)
+ (bin ../../bin)
+ (doc ../../doc/rocq-owl-tactics))
+(files
+ (lib
+  (META
+   dune-package
+   opam
+   plugin/g_owl_tactics.ml
+   plugin/owl_bridge.ml
+   plugin/owl_tactic_core.ml
+   plugin/rocq_owl_tactics_plugin.a
+   plugin/rocq_owl_tactics_plugin.cmi
+   plugin/rocq_owl_tactics_plugin.cmt
+   plugin/rocq_owl_tactics_plugin.cmx
+   plugin/rocq_owl_tactics_plugin.cmxa
+   plugin/rocq_owl_tactics_plugin.ml
+   plugin/rocq_owl_tactics_plugin__G_owl_tactics.cmi
+   plugin/rocq_owl_tactics_plugin__G_owl_tactics.cmt
+   plugin/rocq_owl_tactics_plugin__G_owl_tactics.cmx
+   plugin/rocq_owl_tactics_plugin__Owl_bridge.cmi
+   plugin/rocq_owl_tactics_plugin__Owl_bridge.cmt
+   plugin/rocq_owl_tactics_plugin__Owl_bridge.cmx
+   plugin/rocq_owl_tactics_plugin__Owl_tactic_core.cmi
+   plugin/rocq_owl_tactics_plugin__Owl_tactic_core.cmt
+   plugin/rocq_owl_tactics_plugin__Owl_tactic_core.cmx))
+ (libexec (plugin/rocq_owl_tactics_plugin.cmxs))
+ (bin (rocq-owl-tactics.owl-smoke))
+ (doc (README.md)))
+(library
+ (name rocq-owl-tactics.plugin)
+ (kind normal)
+ (archives (native plugin/rocq_owl_tactics_plugin.cmxa))
+ (plugins (native plugin/rocq_owl_tactics_plugin.cmxs))
+ (native_archives plugin/rocq_owl_tactics_plugin.a)
+ (requires
+  owl
+  rocq-runtime.boot
+  rocq-runtime.clib
+  rocq-runtime.lib
+  rocq-runtime.kernel
+  rocq-runtime.engine
+  rocq-runtime.vernac
+  rocq-runtime.toplevel
+  rocq-runtime.plugins.ltac)
+ (main_module_name Rocq_owl_tactics_plugin)
+ (modes native)
+ (modules
+  (wrapped
+   (group
+    (alias
+     (obj_name rocq_owl_tactics_plugin)
+     (visibility public)
+     (kind alias)
+     (source
+      (path Rocq_owl_tactics_plugin)
+      (impl (path plugin/rocq_owl_tactics_plugin.ml-gen))))
+    (name Rocq_owl_tactics_plugin)
+    (modules
+     (module
+      (obj_name rocq_owl_tactics_plugin__G_owl_tactics)
+      (visibility public)
+      (source (path G_owl_tactics) (impl (path plugin/g_owl_tactics.ml))))
+     (module
+      (obj_name rocq_owl_tactics_plugin__Owl_bridge)
+      (visibility public)
+      (source (path Owl_bridge) (impl (path plugin/owl_bridge.ml))))
+     (module
+      (obj_name rocq_owl_tactics_plugin__Owl_tactic_core)
+      (visibility public)
+      (source (path Owl_tactic_core) (impl (path plugin/owl_tactic_core.ml))))))
+   (wrapped true))))

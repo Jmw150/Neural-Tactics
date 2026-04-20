@@ -1,0 +1,12 @@
+DIGEST 9282face94bde2e3f907b373a379aa95
+FRocqOwlTacticsExamples.demo
+R35:44 RocqOwlTactics.OwlTactics <> <> lib
+def 48:56 <> Unnamed_thm
+R53:56 Corelib.Init.Logic <> True ind
+def 108:135 <> Unnamed_thm0
+binder 120:120 <> P:1
+R131:134 Corelib.Init.Logic <> ::type_scope:x_'->'_x not
+R130:130 RocqOwlTacticsExamples.demo <> P:1 var
+R135:135 RocqOwlTacticsExamples.demo <> P:1 var
+def 193:202 <> Unnamed_thm1
+R199:201 Corelib.Init.Logic <> ::type_scope:x_'='_x not

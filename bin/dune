@@ -1,0 +1,5 @@
+(executable
+ (name owl_smoke)
+ (public_name rocq-owl-tactics.owl-smoke)
+ (modules owl_smoke)
+ (libraries rocq-owl-tactics.plugin))

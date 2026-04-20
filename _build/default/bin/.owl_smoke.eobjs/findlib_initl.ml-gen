@@ -1,0 +1,54 @@
+Findlib.record_package Findlib.Record_core "bigarray";;
+Findlib.record_package Findlib.Record_core "camlzip";;
+Findlib.record_package Findlib.Record_core "ctypes";;
+Findlib.record_package Findlib.Record_core "ctypes.stubs";;
+Findlib.record_package Findlib.Record_core "dynlink";;
+Findlib.record_package Findlib.Record_core "findlib";;
+Findlib.record_package Findlib.Record_core "findlib.dynload";;
+Findlib.record_package Findlib.Record_core "findlib.internal";;
+Findlib.record_package Findlib.Record_core "integers";;
+Findlib.record_package Findlib.Record_core "memprof-limits";;
+Findlib.record_package Findlib.Record_core "npy";;
+Findlib.record_package Findlib.Record_core "owl";;
+Findlib.record_package Findlib.Record_core "owl-base";;
+Findlib.record_package Findlib.Record_core "rocq-owl-tactics.plugin";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.boot";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.clib";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.config";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.coqargs";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.coqworkmgrapi";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.engine";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.gramlib";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.interp";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.kernel";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.lib";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.library";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.parsing";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.perf";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.plugins.ltac";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.pretyping";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.printing";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.proofs";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.stm";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.sysinit";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.tactics";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.toplevel";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.vernac";;
+Findlib.record_package Findlib.Record_core "rocq-runtime.vm";;
+Findlib.record_package Findlib.Record_core "stdlib-shims";;
+Findlib.record_package Findlib.Record_core "str";;
+Findlib.record_package Findlib.Record_core "threads";;
+Findlib.record_package Findlib.Record_core "threads.posix";;
+Findlib.record_package Findlib.Record_core "unix";;
+Findlib.record_package Findlib.Record_core "zarith";;
+Findlib.record_package Findlib.Record_core "zip";;
+let preds =
+  [ "mt"
+  ; "mt_posix"
+  ; "ppx_driver"
+  ]
+in
+let preds =
+  (if Dynlink.is_native then "native" else "byte") :: preds
+in
+Findlib.record_package_predicates preds;;

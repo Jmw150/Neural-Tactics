@@ -1,0 +1,3 @@
+-R theories RocqOwlTactics
+-I _build/default/src
+theories/OwlTactics.v
