@@ -3,12 +3,12 @@
 (version 0.1.0)
 (sections
  (lib
-  /home/jmw150/backup/code/projects/rocq-owl-tactics/_install/lib/rocq-owl-tactics)
+  /home/jmw150/backup/code/projects/neural_tactics/_install/lib/rocq-owl-tactics)
  (libexec
-  /home/jmw150/backup/code/projects/rocq-owl-tactics/_install/lib/rocq-owl-tactics)
- (bin /home/jmw150/backup/code/projects/rocq-owl-tactics/_install/bin)
+  /home/jmw150/backup/code/projects/neural_tactics/_install/lib/rocq-owl-tactics)
+ (bin /home/jmw150/backup/code/projects/neural_tactics/_install/bin)
  (doc
-  /home/jmw150/backup/code/projects/rocq-owl-tactics/_install/doc/rocq-owl-tactics))
+  /home/jmw150/backup/code/projects/neural_tactics/_install/doc/rocq-owl-tactics))
 (files
  (lib
   (META
